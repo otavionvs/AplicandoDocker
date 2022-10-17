@@ -13,14 +13,14 @@ const {
 } = require('firebase/firestore/lite');
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBOJn7LcvGw1Jhhu7ogoAjeBxwXzJ5t3P0",
-    authDomain: "pedido-otavio-matheus-neves.firebaseapp.com",
-    projectId: "pedido-otavio-matheus-neves",
-    storageBucket: "pedido-otavio-matheus-neves.appspot.com",
-    messagingSenderId: "728781742842",
-    appId: "1:728781742842:web:3c49e56d4f7a8435065f43",
-    measurementId: "G-MP19GNW53M"
+    apiKey: "AIzaSyCZfylZ6VRE17gNmFybNFyinaDk9hkLxw8",
+    authDomain: "learning-docker-6f896.firebaseapp.com",
+    projectId: "learning-docker-6f896",
+    storageBucket: "learning-docker-6f896.appspot.com",
+    messagingSenderId: "315634099939",
+    appId: "1:315634099939:web:4daa87e0aa1950c88f87d6"
 };
+
 
 
 const app = initializeApp(firebaseConfig);

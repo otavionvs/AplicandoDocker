@@ -11,41 +11,46 @@ const nomeTabela = "Products";
 //6 - Retornar o sucesso do cadastro
 
 
-async function cadastrarProduct(dados = { Name: "", Price: 0, User: "", Senha: "" }) {
-    if (!dados.Name) {
+async function cadastrarProduct(dados = { name: "", price: 0, description: "", userCPF: "", userPassword: ""}) {
+    if (!dados.name) {
         return {
             error: "0001", message: "É necessario preencher os parâmetros da requisição!",
-            camposNecessarios: ["Name"]
+            camposNecessarios: ["name"]
         }
     }
-    if (!dados.User) {
+    if (!dados.description) {
+        return {
+            error: "0001", message: "É necessario preencher os parâmetros da requisição!",
+            camposNecessarios: ["description"]
+        }
+    }
+    if (!dados.userCPF) {
         return {
             error: "0001", message: "É necessario preencher os parâmetros da requisição!",
             camposNecessarios: ["User"]
         }
     }
-    if (!dados.Senha) {
+    if (!dados.userPassword) {
         return {
             error: "0001", message: "É necessario preencher os parâmetros da requisição!",
             camposNecessarios: ["Senha"]
         }
     }
-    if (!dados.Price || !(dados.Price > 0)) {
+    if (!dados.price || !(dados.price > 0)) {
         return {
             error: "0001", message: "É necessario preencher os parâmetros da requisição!",
             camposNecessarios: ["Price"]
         }
     }
-    if (typeof (dados.Price) != "number") {
+    if (typeof (dados.price) != "number") {
         return {
             error: "0002", message: "O Tipo de dado passado não corresponde ao esperado!",
-            tipoDeDado: typeof dados.Price, tipoEsperado: "number"
+            tipoDeDado: typeof dados.price, tipoEsperado: "number"
         }
     }
 
-    const login = await verificarLogin(dados.User, dados.Senha);
-    delete dados.User
-    delete dados.Senha
+    const login = await verificarLogin(dados.userCPF, dados.userPassword);
+    delete dados.userPassword
     if (login) {
         const Product = await crud.save(nomeTabela, undefined, dados);
         return Product;
@@ -54,8 +59,8 @@ async function cadastrarProduct(dados = { Name: "", Price: 0, User: "", Senha: "
     }
 }
 
-async function verificarLogin(User, Senha) {
-    const body = { User: User, Senha: Senha };
+async function verificarLogin(userCPF, userPassword) {
+    const body = { CPF: userCPF, Password: userPassword };
 
     const fetch = require('node-fetch');
     const response = await fetch('http://destino:3000/api/Users', {

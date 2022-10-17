@@ -12,7 +12,7 @@ const nomeTabela = "Users";
 //9 - Retornar o sucesso do cadastro
 
 
-async function cadastrarUser(dados = {CPF: "", Name: "", User: "", Senha: ""}){
+async function cadastrarUser(dados = {CPF: "", Name: "", Password: ""}){
     if(!dados.CPF){
         return {
             error: "0001", message: "É necessario preencher os parâmetros da requisição!",
@@ -25,16 +25,10 @@ async function cadastrarUser(dados = {CPF: "", Name: "", User: "", Senha: ""}){
             camposNecessarios: ["Name"]
         }
     }
-    if(!dados.User){
+    if(!dados.Password){
         return {
             error: "0001", message: "É necessario preencher os parâmetros da requisição!",
-            camposNecessarios: ["User"]
-        }
-    }
-    if(!dados.Senha){
-        return {
-            error: "0001", message: "É necessario preencher os parâmetros da requisição!",
-            camposNecessarios: ["Senha"]
+            camposNecessarios: ["Password"]
         }
     }
     if(dados.CPF.length != 11){
@@ -84,11 +78,11 @@ async function buscarUserId(id) {
     return dados;
 }
 
-async function login(dado = {User: "", Senha: ""}) {
+async function login(dado = {CPF: "", Password: ""}) {
     console.log(dado);
-    const dados = await crud.getWithFilter(nomeTabela, "User", "==", dado.User);
-    console.log(dados[0].Senha);
-    if(dados[0].Senha == dado.Senha){
+    const dados = await crud.getWithFilter(nomeTabela, "CPF", "==", dado.CPF);
+    console.log(dados[0]);
+    if(dados[0].Password == dado.Password){
         return true;
     }
     return false;
